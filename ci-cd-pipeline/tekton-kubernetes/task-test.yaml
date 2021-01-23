@@ -1,14 +1,13 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: test-nodejs-app
 spec:
-  inputs:
-    params:
-      - name: DEPLOY_ENVIRONMENT
-        description: The environment where you deploy the app
-        default: 'env-dev'
-        type: string
+  params:
+    - name: DEPLOY_ENVIRONMENT
+      description: The environment where you deploy the app
+      default: 'env-dev'
+      type: string
   steps:
     - name: test-image
       image: lachlanevenson/k8s-kubectl

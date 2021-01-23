@@ -1,23 +1,22 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: promote-nodejs-app
 spec:
-  inputs:
-    resources:
+  resources:
+    inputs:
       - name: source
         type: git
       - name: image
         type: image
-    params:
-      - name: PROMOTE_ENVIRONMENT
-        description: The environment where you deploy the app
-        default: 'env-stage'
-        type: string
-  outputs:
-    resources:
+    outputs:
       - name: image
         type: image
+  params:
+    - name: PROMOTE_ENVIRONMENT
+      description: The environment where you deploy the app
+      default: 'env-stage'
+      type: string
 
   steps:
     - name: promote-image

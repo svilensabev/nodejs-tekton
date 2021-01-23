@@ -43,4 +43,4 @@ spec:
                 name: authors-secret-api
                 key: AUTHORS_API_KEY
       imagePullSecrets:
-        - name: cloud-stack-registry-secret
+        - name: docker-config

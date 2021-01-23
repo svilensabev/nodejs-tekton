@@ -1,14 +1,13 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: build-nodejs-app
 spec:
-  inputs:
-    resources:
+  resources:
+    inputs:
       - name: source
         type: git
-  outputs:
-    resources:
+    outputs:
       - name: image
         type: image
   stepTemplate:
@@ -18,7 +17,21 @@ spec:
       command:
         - /kaniko/executor
       args:
+        - "--cache=true"
         - "--dockerfile=./source/ci-cd-pipeline/tekton-kubernetes/Dockerfile"
         - "--destination=$(outputs.resources.image.url)"
         - "--context=$(inputs.resources.source.path)/"
-        - "--verbosity=debug"
+      # specifying DOCKER_CONFIG is required to allow kaniko to detect docker credential
+      env:
+        - name: "DOCKER_CONFIG"
+          value: "/tekton/home/.docker/"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secret/kaniko-secret.json
+      volumeMounts:
+      - name: kaniko-secret
+        mountPath: /secret
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: kaniko-secret
+        defaultMode: 0400

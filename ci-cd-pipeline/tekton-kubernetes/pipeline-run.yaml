@@ -1,9 +1,9 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: nodejs-pipeline-run
 spec:
-  serviceAccountName: pipeline-run-sa
+  serviceAccountName: default
   pipelineRef:
     name: nodejs-pipeline
   resources:
