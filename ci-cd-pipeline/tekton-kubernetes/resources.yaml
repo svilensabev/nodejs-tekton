@@ -19,7 +19,7 @@ spec:
   type: image
   params:
     - name: url
-      value: eu.gcr.io/tekton-pipeline/nodejs-app:latest
+      value: eu.gcr.io/cloud-stack-project/nodejs-app:latest
 ---
 
 apiVersion: tekton.dev/v1alpha1
@@ -30,4 +30,4 @@ spec:
   type: image
   params:
     - name: url
-      value: eu.gcr.io/tekton-pipeline/nodejs-app:stage
+      value: eu.gcr.io/cloud-stack-project/nodejs-app:stage
