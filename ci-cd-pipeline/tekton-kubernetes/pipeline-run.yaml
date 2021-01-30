@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   name: nodejs-pipeline-run
 spec:
-  serviceAccountName: default
+  serviceAccountName: pipeline-run-sa
   pipelineRef:
     name: nodejs-pipeline
   resources:
